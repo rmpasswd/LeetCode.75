@@ -19,21 +19,21 @@ func mergeAlternately(word1 string, word2 string) string {
 }
 ```
 
-- From Editorial:
-- `return ''.join(c for pair in zip_longest(word1, word2, fillvalue='') for c in pair)`. This uses python itertools package.
+- From Editorial, this uses python itertools package: `return ''.join(c for pair in zip_longest(word1, word2, fillvalue='') for c in pair)`.
 -  Using built-in zip function=>
 -  zip function lazy loads the tuples, we will get the generator object only this way: `print(c for pair in list(zip("abc","word2")) for c in pair )`
 -
 - ```python
    for pair in list(zip("abc","word2")):
         for c in pair:
-            print(c) # prints the charcter individually
-  #equivalent one-line=>
+            print(c) # prints all the charcters individually
+  
+  #equivalent one-liner=>
   print(c for pair in list(zip("abc","word2")) for c in pair )
   # prints this: <generator object mergeAlternately.<locals>.<genexpr> at 0x000002BFD5B14820>
    ```
 - zip itself is a generator expression. See the hint "yield" below... ![image](https://github.com/user-attachments/assets/933800c5-ef22-4785-b247-f36c4e4ea81d)
-- `print(generator_expression)` prints the generator object itself because print() does not iterate over it. **this is why** the code block above printed the generator object. But worked fine when we did the iteration 'manually'
+- `print(generator_expression)` prints the generator object itself because print() does not iterate over it. **this is why** the code block above printed the generator object. But worked fine when we did the iteration 'manually' and printed just `c`
 
 - `"".join(generator_expression)` **iterates** over the generator, collects its items, and produces a string. Thus this works: `print("".join(c for pair in list(zip("abc","word2")) for c in pair )) # prints awbocr`
 ### Solution in Python3
